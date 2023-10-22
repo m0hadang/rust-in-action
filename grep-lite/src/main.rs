@@ -4,6 +4,15 @@ use std::fs::File;
 use std::io::BufReader;
 use std::io::prelude::*;// for implement BufReader lines()
 
+fn process_lines<T: BufRead + Sized>(reader: T, re: Regex) {
+    for line in reader.lines() {
+        let line = line.unwrap();
+        match re.find(&line) {
+            Some(_) => println!("{}", line),
+            None => (),
+        }
+    }
+}
 fn main() {
     let args = App::new("grep-lite")
         .version("0.1")
@@ -18,18 +27,17 @@ fn main() {
             .required(true))
         .get_matches();
 
-    let pattern = args.value_of("pattern").unwrap();
-    let re = Regex::new(pattern).unwrap();
-
     let input = args.value_of("input").unwrap();
-    let f = File::open(input).unwrap();
-    let reader = BufReader::new(f);
-    for line in reader.lines() {
-        let line = line.unwrap();
-        let contains_substring = re.find(&line);
-        match contains_substring {
-            Some(_) => println!("{}", line),
-            None => (),
-        }
+    let pattern = args.value_of("pattern").unwrap();
+
+    let re = Regex::new(pattern).unwrap();
+    if input == "-" {
+        let stdin = std::io::stdin();
+        let reader = stdin.lock();
+        process_lines(reader, re);
+    } else {
+        let f = File::open(input).unwrap();
+        let reader = BufReader::new(f);
+        process_lines(reader, re);
     }
 }
