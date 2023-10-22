@@ -1,7 +1,19 @@
 use regex::Regex;
+use clap::{App, Arg};
 
 fn main() {
-    let re = Regex::new("picture").unwrap();
+    let args = App::new("grep-lite")
+        .version("0.1")
+        .about("searched for patterns")
+        .arg(Arg::with_name("pattern")
+            .help("The pattern to search for")
+            .takes_value(true)
+            .required(true))
+        .get_matches();
+
+    let pattern = args.value_of("pattern").unwrap();
+    let re = Regex::new(pattern).unwrap();
+
     let quote = "\
 Every face, every shop, 
 bedroom window, public-house, and

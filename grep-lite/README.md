@@ -1,0 +1,4 @@
+ex)
+```
+cargo run -- picture
+```
