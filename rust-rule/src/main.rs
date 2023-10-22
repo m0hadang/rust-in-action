@@ -1,3 +1,4 @@
+use std::time::Duration;
 fn this_is_binding() {
     let _a = 10; // this is binding
 }
@@ -61,7 +62,23 @@ fn ref_and_memory_address() {
     let r = &a; // r : mem address of a
     let _b = a + *r; // deref
 }
-
+fn add_with_lifetime<'a, 'b>(i: &'a i32, j: &'b i32) -> i32 {
+    *i + *j
+}
+fn life_annotation() {
+    let a = 10;
+    let b = 20;
+    println!("life annotation : {}", add_with_lifetime(&a, &b));
+}
+fn add_with_generic<T: std::ops::Add<Output = T>>(i: T, j: T) -> T {
+    i + j
+}
+fn generic() {
+    let f = add_with_generic(1.2, 3.4);
+    let i = add_with_generic(1, 3);
+    let du = add_with_generic(Duration::new(5, 0), Duration::new(10, 0));
+    println!("generid : {}, {}, {:?}", f, i, du);
+}
 fn main() {
     this_is_binding();
     float_is_danger();
@@ -69,4 +86,6 @@ fn main() {
     rust_is_expression_language();
     match_is_important_in_rust();
     ref_and_memory_address();
+    life_annotation();
+    generic();
 }
