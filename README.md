@@ -14,4 +14,7 @@ $ cargo install cargo-edit
 Add Thidpary
 ```
 $ cargo add num
+
+// spcifix version
+$ cargo add regex@1 
 ```
