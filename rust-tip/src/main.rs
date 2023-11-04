@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 struct Hostname(String); // new type
 
 fn connect(host: Hostname) {
