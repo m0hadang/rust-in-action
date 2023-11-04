@@ -115,6 +115,12 @@ fn ex_print_from_utf8_lossy() {
     assert_eq!("💖", sparkle_heart);
 }
 
+#[derive(Default, Debug, PartialEq)]
+enum FileState {
+    #[default]
+    Open, // set Enum Default Value
+    Closed,
+}
 
 fn main() {
     this_is_binding();
