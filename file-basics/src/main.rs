@@ -3,12 +3,14 @@
 use std::fmt;
 use std::fmt::Display;
 
-
+// ! 한 번에 한 단계씩 파일을 시뮬레이트
+//
+// // maybe file system
 #[derive(Default, Debug, PartialEq)]
 enum FileState {
     #[default]
-    Open,
     Closed,
+    Open,
 }
 
 impl Display for FileState {
@@ -34,12 +36,14 @@ struct File {
 }
 
 impl File {
+    // create new file
     fn new(name: &str) -> File {
         File {
             name: String::from(name),
             ..Default::default()
         }
     }
+    // read file
     fn read(
         self: &File,
         save_to: &mut Vec<u8>
@@ -58,12 +62,13 @@ impl File {
 }
 
 
-
+// open file
 fn open(mut f: File) -> Result<File, String> {
     f.state = FileState::Open;
     Ok(f)
 }
 
+// close file
 fn close(mut f: File) -> Result<File, String> {
     f.state = FileState::Closed;
     Ok(f)

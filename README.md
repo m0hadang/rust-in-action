@@ -18,3 +18,8 @@ $ cargo add num
 // spcifix version
 $ cargo add regex@1 
 ```
+# create rust document
+
+```
+rustdoc xxx.rs
+```
