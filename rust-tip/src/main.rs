@@ -1,3 +1,9 @@
+struct Hostname(String); // new type
+
+fn connect(host: Hostname) {
+    println!("connected to {}", host.0);
+}
+
 fn main() {
-    println!("Hello, world!");
+    //connect("aaa"); // cant use
 }
