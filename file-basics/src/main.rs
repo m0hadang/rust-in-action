@@ -1,5 +1,8 @@
 #![allow(unused_variables)]
 
+use std::fmt;
+use std::fmt::Display;
+
 
 #[derive(Default, Debug, PartialEq)]
 enum FileState {
@@ -8,6 +11,20 @@ enum FileState {
     Closed,
 }
 
+impl Display for FileState {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            FileState::Open => write!(f, "OPEN"),
+            FileState::Closed => write!(f, "CLOSED"),
+        }
+    }
+}
+
+impl Display for File {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "<{} ({})>", self.name, self.state)
+    }
+}
 
 #[derive(Debug, Default)]
 struct File {
@@ -41,6 +58,7 @@ impl File {
 }
 
 
+
 fn open(mut f: File) -> Result<File, String> {
     f.state = FileState::Open;
     Ok(f)
@@ -66,7 +84,6 @@ fn main() {
 
     let text = String::from_utf8_lossy(&buffer);
 
+    println!("{}", f);
     println!("{:?}", f);
-    println!("{} is {} bytes long", &f.name, f_length);
-    println!("{}", text);
 }
