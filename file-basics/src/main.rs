@@ -7,6 +7,15 @@ struct File {
     data: Vec<u8>,
 }
 
+impl File {
+    fn new(name: &str) -> File {
+        File {
+            name: String::from(name),
+            data: Vec::new(),
+        }
+    }
+}
+
 fn open(f: &mut File) -> bool {
     true
 }
@@ -29,10 +38,7 @@ fn read(
 }
 
 fn main() {
-    let mut f2 = File {
-        name: String::from("2.txt"),
-        data: vec![114, 117, 115, 116, 33],
-    };
+    let mut f2 = File::new("2.txt");
 
     let mut buffer: Vec<u8> = vec![];
 
