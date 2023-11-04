@@ -96,6 +96,17 @@ struct Hostname(String); // new type
 fn ex_new_type_patter(host: Hostname) {
     println!("connected to {}", host.0);
 }
+enum NewType {
+    AType(i64),
+    BType(String),
+}
+fn rust_has_two_type_enum_and_struct(new_type: NewType) {
+    match new_type {
+        NewType::AType(i) => {println!("{i}")},
+        NewType::BType(s) => {println!("{s}")},
+        _ => {},
+    }
+}
 
 fn ex_print_from_utf8_lossy() {
     // some bytes, in a vector
@@ -103,6 +114,7 @@ fn ex_print_from_utf8_lossy() {
     let sparkle_heart = String::from_utf8_lossy(&sparkle_heart);
     assert_eq!("💖", sparkle_heart);
 }
+
 
 fn main() {
     this_is_binding();
@@ -115,4 +127,5 @@ fn main() {
     generic();
     //ex_new_type_patter("aaa"); // protect wrong use(it's type check)
     ex_print_from_utf8_lossy();
+    rust_has_two_type_enum_and_struct(NewType::AType(10));
 }
