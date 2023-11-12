@@ -5,6 +5,9 @@
  * 군집 : 궤도를 돌고 있는 위성 집합.
  * */
 
+use std::cell::RefCell;
+use std::rc::Rc;
+
 #[derive(Debug)]
 struct CubeSat {
     id: u64,
@@ -21,7 +24,10 @@ struct Message {
     content: String,
 }
 
-struct GroundStation;
+#[derive(Default)]
+struct GroundStation {
+    radio_freq: f64,
+}
 
 impl CubeSat {
     fn recv(&mut self, mailbox: &mut Mailbox) -> Option<Message> {
@@ -59,9 +65,12 @@ fn fetch_sat_ids() -> Vec<u64> {
 
 fn main() {
     let mut mail_box = Mailbox { messages: vec![] };
-    let base = GroundStation {};
+    let base = Rc::new(RefCell::new(GroundStation {
+        ..Default::default()
+    }));
     let sat_ids = fetch_sat_ids();
     for sat_id in sat_ids {
+        let base = base.borrow();
         let msg = Message {
             to: sat_id,
             content: String::from("hello"),
@@ -70,8 +79,21 @@ fn main() {
     }
     let sat_ids = fetch_sat_ids();
     for sat_id in sat_ids {
+        let base = base.borrow();
         let mut sat = base.connect(sat_id);
         let msg = sat.recv(&mut mail_box);
         println!("{:?}: {:?}", sat, msg);
     }
+
+    {
+        // scope is essential
+        let mut base = base.borrow_mut();
+        base.radio_freq = 10.1;
+    }
+    println!("freq : {}", base.borrow().radio_freq);
+    {
+        let mut base = base.borrow_mut();
+        base.radio_freq = 5.2;
+    }
+    println!("freq : {}", base.borrow().radio_freq);
 }
