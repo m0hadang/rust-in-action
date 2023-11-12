@@ -8,7 +8,34 @@
 #[derive(Debug)]
 struct CubeSat {
     id: u64,
+    mailbox: Mailbox,
 }
+
+type Message = String;
+#[derive(Debug)]
+struct Mailbox {
+    messages: Vec<Message>,
+}
+
+struct GroundStation;
+
+impl CubeSat {
+    fn recv(&mut self) -> Option<Message> {
+        self.mailbox.messages.pop()
+    }
+}
+
+impl GroundStation {
+    fn send(
+        &self,
+        to: &mut CubeSat,
+        msg: Message,
+        ) {
+        to.mailbox.messages.push(msg);
+    }
+
+}
+
 
 #[derive(Debug)]
 enum StatusMessage {
@@ -22,9 +49,9 @@ fn check_status(sat: CubeSat) -> CubeSat {
 
 
 fn main() {
-    let sat_a = CubeSat { id: 0 };
-    let sat_b = CubeSat { id: 1 };
-    let sat_c = CubeSat { id: 2 };
+    let sat_a = CubeSat { id: 0, mailbox: Mailbox { messages: vec![] }  };
+    let sat_b = CubeSat { id: 1, mailbox: Mailbox { messages: vec!["hello there!".to_string()] }  };
+    let sat_c = CubeSat { id: 2, mailbox: Mailbox { messages: vec![] }  };
 
     // moved ownership
     let sat_a = check_status(sat_a);
