@@ -4,6 +4,29 @@
  * 메시지를 주고 받는다. 여기서는 사용자와 위성 간 게이트웨이 역할.
  * 군집 : 궤도를 돌고 있는 위성 집합.
  * */
+#[derive(Debug)]
+enum StatusMessage {
+    Ok,
+}
+
+fn check_status(sat_id: u64) -> StatusMessage {
+    StatusMessage::Ok
+}
+
+
 fn main() {
-    println!("Hello, world!");
+    let sat_a = 0;
+    let sat_b = 1;
+    let sat_c = 2;
+
+    let a_status = check_status(sat_a);
+    let b_status = check_status(sat_b);
+    let c_status = check_status(sat_c);
+    println!("a: {:?}, b: {:?}, c: {:?}", a_status, b_status, c_status);
+
+    //wait...
+    let a_status = check_status(sat_a);
+    let b_status = check_status(sat_b);
+    let c_status = check_status(sat_c);
+    println!("a: {:?}, b: {:?}, c: {:?}", a_status, b_status, c_status);
 }
