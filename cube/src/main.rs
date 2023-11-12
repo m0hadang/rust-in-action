@@ -15,8 +15,9 @@ enum StatusMessage {
     Ok,
 }
 
-fn check_status(sat: CubeSat) -> StatusMessage {
-    StatusMessage::Ok
+fn check_status(sat: CubeSat) -> CubeSat {
+    println!("{:?}: {:?}", sat, StatusMessage::Ok);
+    sat
 }
 
 
@@ -26,16 +27,12 @@ fn main() {
     let sat_c = CubeSat { id: 2 };
 
     // moved ownership
-    let a_status = check_status(sat_a);
-    let b_status = check_status(sat_b);
-    let c_status = check_status(sat_c);
-    println!("a: {:?}, b: {:?}, c: {:?}", a_status, b_status, c_status);
+    let sat_a = check_status(sat_a);
+    let sat_b = check_status(sat_b);
+    let sat_c = check_status(sat_c);
 
     //wait...
-
-    // can't access.
-//    let a_status = check_status(sat_a);
-//    let b_status = check_status(sat_b);
-//    let c_status = check_status(sat_c);
-//    println!("a: {:?}, b: {:?}, c: {:?}", a_status, b_status, c_status);
+    let sat_a = check_status(sat_a);
+    let sat_b = check_status(sat_b);
+    let sat_c = check_status(sat_c);
 }
