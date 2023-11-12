@@ -36,30 +36,14 @@ impl GroundStation {
 
 }
 
-
-#[derive(Debug)]
-enum StatusMessage {
-    Ok,
-}
-
-fn check_status(sat: CubeSat) -> CubeSat {
-    println!("{:?}: {:?}", sat, StatusMessage::Ok);
-    sat
-}
-
-
 fn main() {
-    let sat_a = CubeSat { id: 0, mailbox: Mailbox { messages: vec![] }  };
-    let sat_b = CubeSat { id: 1, mailbox: Mailbox { messages: vec!["hello there!".to_string()] }  };
-    let sat_c = CubeSat { id: 2, mailbox: Mailbox { messages: vec![] }  };
+    let base = GroundStation {};
+    let mut sat_a = CubeSat { id: 0, mailbox: Mailbox { messages: vec![] }  };
 
-    // moved ownership
-    let sat_a = check_status(sat_a);
-    let sat_b = check_status(sat_b);
-    let sat_c = check_status(sat_c);
-
-    //wait...
-    let sat_a = check_status(sat_a);
-    let sat_b = check_status(sat_b);
-    let sat_c = check_status(sat_c);
+    println!("1: {:?}", sat_a);
+    base.send(&mut sat_a, Message::from("hello there!!"));
+    println!("2: {:?}", sat_a);
+    let msg = sat_a.recv();
+    println!("3: {:?}", sat_a);
+    println!("msg : {:?}", msg);
 }
