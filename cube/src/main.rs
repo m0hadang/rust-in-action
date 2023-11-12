@@ -41,8 +41,12 @@ fn main() {
     let mut sat_a = CubeSat { id: 0, mailbox: Mailbox { messages: vec![] }  };
 
     println!("1: {:?}", sat_a);
+
+    // message ownership is moved to send function
     base.send(&mut sat_a, Message::from("hello there!!"));
     println!("2: {:?}", sat_a);
+
+    // message ownership is returned
     let msg = sat_a.recv();
     println!("3: {:?}", sat_a);
     println!("msg : {:?}", msg);
