@@ -102,9 +102,13 @@ enum NewType {
 }
 fn rust_has_two_type_enum_and_struct(new_type: NewType) {
     match new_type {
-        NewType::AType(i) => {println!("{i}")},
-        NewType::BType(s) => {println!("{s}")},
-        _ => {},
+        NewType::AType(i) => {
+            println!("{i}")
+        }
+        NewType::BType(s) => {
+            println!("{s}")
+        }
+        _ => {}
     }
 }
 
@@ -122,6 +126,19 @@ enum FileState {
     Closed,
 }
 
+fn overflow_panic() {
+    // if do not optimize then panic !
+    let mut i: u16 = 0;
+    println!("{} ..", i);
+    loop {
+        i += 1000;
+        print!("{}..", i);
+        if i % 10000 == 0 {
+            println!();
+        }
+    }
+}
+
 fn main() {
     this_is_binding();
     float_is_danger();
@@ -134,4 +151,5 @@ fn main() {
     //ex_new_type_patter("aaa"); // protect wrong use(it's type check)
     ex_print_from_utf8_lossy();
     rust_has_two_type_enum_and_struct(NewType::AType(10));
+    //overflow_panic();
 }
