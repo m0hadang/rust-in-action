@@ -139,6 +139,27 @@ fn overflow_panic() {
     }
 }
 
+fn sign_bit() {
+    // 부호
+    let n: f32 = 42.42;
+    let n_bits: u32 = n.to_bits();
+    let sign_bit = n_bits >> 31;
+    println!("sign bit : {sign_bit}")
+}
+
+fn exponent_bits() {
+    // 지수부
+    let n: f32 = 42.42;
+    let n_bits: u32 = n.to_bits();
+    let exponent = n_bits >> 23;
+    let exponent = exponent & 0xff;
+
+    // 지수 편차 = 127
+    let exponent = (exponent as i32) - 127;
+
+    println!("exponent bits : {exponent}")
+}
+
 fn main() {
     this_is_binding();
     float_is_danger();
@@ -152,4 +173,6 @@ fn main() {
     ex_print_from_utf8_lossy();
     rust_has_two_type_enum_and_struct(NewType::AType(10));
     //overflow_panic();
+    sign_bit();
+    exponent_bits();
 }
