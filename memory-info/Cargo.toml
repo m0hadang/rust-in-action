@@ -1,0 +1,25 @@
+[package]
+name = "memory-info"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+[dependencies.winapi]
+version = "0.3.9"
+features = [
+    "minwindef",
+    "winnt",
+    "sysinfoapi",
+    "processthreadsapi",
+    "memoryapi",
+    "basetsd",
+]
+
+#[dependencies.windows-sys]
+#version = "0.52.0"
+#features = [
+#    "Win32_Foundation",
+#    "Win32_System_Memory",
+#]
