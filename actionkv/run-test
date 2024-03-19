@@ -1,0 +1,8 @@
+cargo run test.bin insert test-key test-value
+cargo run test.bin insert hello world
+cargo run test.bin get test-key
+cargo run test.bin get hello
+cargo run test.bin update hello 12345
+cargo run test.bin get hello
+cargo run test.bin delete hello
+cargo run test.bin get hello
