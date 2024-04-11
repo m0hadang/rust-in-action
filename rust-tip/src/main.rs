@@ -139,6 +139,10 @@ fn overflow_panic() {
     }
 }
 
+fn container_arguments_using_ref(buf: &[u8]) {
+    println!("{buf:?}")
+}
+
 fn main() {
     this_is_binding();
     float_is_danger();
@@ -152,4 +156,9 @@ fn main() {
     ex_print_from_utf8_lossy();
     rust_has_two_type_enum_and_struct(NewType::AType(10));
     //overflow_panic();
+
+    let vec_data = vec![0_u8, 1_u8, 2_u8];
+    container_arguments_using_ref(&vec_data);
+    let arr_data = [3_u8, 4_u8, 5_u8];
+    container_arguments_using_ref(&arr_data);
 }
