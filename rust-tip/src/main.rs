@@ -1,7 +1,5 @@
 #![allow(unused)]
 
-use std::time::Duration;
-
 fn this_is_binding() {
     let _a = 10; // this is binding
 }
@@ -88,7 +86,10 @@ fn add_with_generic<T: std::ops::Add<Output = T>>(i: T, j: T) -> T {
 fn generic() {
     let f = add_with_generic(1.2, 3.4);
     let i = add_with_generic(1, 3);
-    let du = add_with_generic(Duration::new(5, 0), Duration::new(10, 0));
+    let du = add_with_generic(
+        std::time::Duration::new(5, 0),
+        std::time::Duration::new(10, 0),
+    );
     println!("generid : {}, {}, {:?}", f, i, du);
 }
 
@@ -143,6 +144,20 @@ fn container_arguments_using_ref(buf: &[u8]) {
     println!("{buf:?}")
 }
 
+fn return_result() -> std::io::Result<()> {
+    println!("return_result_and_unwrap");
+    Ok(())
+}
+
+fn match_with_unwrap(key: &str) {
+    match key {
+        // can use with println, eprintln
+        "aaa" => return_result().unwrap(),
+        "ccc" => println!("ccc"),
+        _ => eprintln!("not match key"),
+    }
+}
+
 fn main() {
     this_is_binding();
     float_is_danger();
@@ -161,4 +176,6 @@ fn main() {
     container_arguments_using_ref(&vec_data);
     let arr_data = [3_u8, 4_u8, 5_u8];
     container_arguments_using_ref(&arr_data);
+
+    match_with_unwrap("aaa");
 }
