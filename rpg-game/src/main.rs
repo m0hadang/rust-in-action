@@ -65,6 +65,6 @@ fn main() {
     let party: Vec<&dyn Enchanter> = vec![&d, &h, &e]; // use trait type
     let spellcaster = party.choose(&mut rand::thread_rng()).unwrap();
 
-    // can't access original instance type
+    // erased original type : can't access original instance type
     spellcaster.enchant(&mut it);
 }

@@ -9,4 +9,4 @@ edition = "2021"
 
 [[bin]]
 name = "dyn-error"
-path = "src/dyn-example.rs"
+path = "src/wrap-example.rs"
