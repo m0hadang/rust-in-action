@@ -1,5 +1,7 @@
 #![allow(unused)]
 
+use std::intrinsics::const_deallocate;
+
 fn this_is_binding() {
     let _a = 10; // this is binding
 }
@@ -156,6 +158,16 @@ fn match_with_unwrap(key: &str) {
         "ccc" => println!("ccc"),
         _ => eprintln!("not match key"),
     }
+}
+
+fn _when_i_use_unwrap_and_expect() {
+    /*
+        if you are writing code in main function
+        unwrap and expect is good choice
+        but if you are writing library code
+        then it is not recommended
+        because user can't not handle error.
+    */
 }
 
 fn main() {
