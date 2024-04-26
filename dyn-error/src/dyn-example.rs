@@ -17,7 +17,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // disadvantage
     // - runtime cost
     // - erased original type
-    let _a = ":0".parse::<Ipv6Addr>()?;
+    let _a = ":0".parse::<Ipv6Addr>()?; // call std::convert::From
     let _b = File::open("invisible.txt")?;
 
     Ok(())

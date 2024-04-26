@@ -14,9 +14,23 @@ impl std::fmt::Display for UpstreamError {
     }
 }
 
+// impl for comvert from
+impl From<io::Error> for UpstreamError {
+    fn from(error: io::Error) -> Self {
+        UpstreamError::IO(error)
+    }
+}
+
+// impl for convert from
+impl From<net::AddrParseError> for UpstreamError {
+    fn from(error: net::AddrParseError) -> Self {
+        UpstreamError::Parsing(error)
+    }
+}
+
 fn main() -> Result<(), UpstreamError> {
-    let _f = File::open("invisible.txt").map_err(UpstreamError::IO)?;
-    let _localhost = "::1".parse::<Ipv6Addr>().map_err(UpstreamError::Parsing)?;
+    let _f = File::open("invisible.txt")?; // call convert from
+    let _localhost = "::1".parse::<Ipv6Addr>()?; // call convert from
 
     Ok(())
 }
