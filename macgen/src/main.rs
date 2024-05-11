@@ -37,18 +37,26 @@ impl MacAddress {
      *   - 0 : unicast
      *   - 1 : multicast
      * */
-    fn is_local(&self) -> bool {
-        (self.0[0] & 0b_0000_0010) == 0b_0000_0010
-    }
 
+    fn is_local(&self) -> bool {
+        (self.0[0] & 0b_0000_0010) != 0
+    }
+    fn is_universal(&self) -> bool {
+        !self.is_local()
+    }
+    fn is_multicast(&self) -> bool {
+        (self.0[0] & 0b_0000_0001) != 0
+    }
     fn is_unicast(&self) -> bool {
-        (self.0[0] & 0b_0000_0001) == 0b_0000_0001
+        !self.is_multicast()
     }
 }
 
 fn main() {
     let mac = MacAddress::new();
     assert!(mac.is_local());
-    assert!(mac.is_unicast());
+    assert!(!mac.is_universal());
+    assert!(mac.is_multicast());
+    assert!(!mac.is_unicast());
     println!("mac: {}", mac);
 }
