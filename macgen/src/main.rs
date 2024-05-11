@@ -25,7 +25,18 @@ impl MacAddress {
         octets[0] |= 0b_0000_0011;
         MacAddress { 0: octets }
     }
-
+    /*
+     * first byte
+     *
+     * "xxxx_xxab"
+     *
+     * a
+     *   - 0 : globally unique(OUI enforced)
+     *   - 1 : locally administered
+     * b
+     *   - 0 : unicast
+     *   - 1 : multicast
+     * */
     fn is_local(&self) -> bool {
         (self.0[0] & 0b_0000_0010) == 0b_0000_0010
     }
@@ -41,4 +52,3 @@ fn main() {
     assert!(mac.is_unicast());
     println!("mac: {}", mac);
 }
-
