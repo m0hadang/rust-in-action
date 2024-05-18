@@ -1,7 +1,5 @@
 #![allow(unused)]
 
-use std::intrinsics::const_deallocate;
-
 fn this_is_binding() {
     let _a = 10; // this is binding
 }
@@ -168,6 +166,10 @@ fn _when_i_use_unwrap_and_expect() {
         then it is not recommended
         because user can't not handle error.
     */
+}
+
+fn return_never_type() -> ! {
+    unimplemented!()
 }
 
 fn main() {
