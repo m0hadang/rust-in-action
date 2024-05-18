@@ -1,8 +1,5 @@
-use chrono::{Datelike, DateTime, Days, Local, Timelike, TimeZone};
+use chrono::{DateTime, Days, Local, TimeZone};
 use std::mem::zeroed;
-
-#[cfg(not(windows))]
-use libc;
 
 #[cfg(not(windows))]
 fn set_clock<Tz: TimeZone>(t: DateTime<Tz>) {
@@ -24,6 +21,7 @@ fn set_clock<Tz: TimeZone>(t: DateTime<Tz>) {
 #[cfg(windows)]
 fn set_clock<Tz: TimeZone>(t: DateTime<Tz>) -> () {
     use chrono::Weekday;
+    use chrono::{Datelike, Timelike};
     use kernel32::SetSystemTime;
     use winapi::{SYSTEMTIME, WORD};
 
