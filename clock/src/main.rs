@@ -77,6 +77,15 @@ fn main() {
     let now = now.checked_add_days(Days::new(3)).unwrap();
     set_clock(now);
 
+    let maybe_error = std::io::Error::last_os_error();
+    let os_error_code = &maybe_error.raw_os_error();
+
+    match os_error_code {
+        Some(0) => (),
+        Some(_) => eprintln!("Unable to set the time: {:?}", maybe_error),
+        None => (),
+    }
+
     println!("AFTER 3 DAYS");
     print_time();
 }
