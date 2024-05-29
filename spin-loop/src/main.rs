@@ -19,6 +19,14 @@ fn spin_loop() {
             handlers.push(handle);
         }
 
+        // for handle in &handlers {
+        //     // !! compile error : thread is no more exists
+        //     // can't refrence not exists(terminated thread) ->
+        //     // should not access another thread
+        //     // if you wnat fix compile error then remove & from handlers
+        //     handle.join();
+        // }
+
         while let Some(handle) = handlers.pop() {
             handle.join();
         }
