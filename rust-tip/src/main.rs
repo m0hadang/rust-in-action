@@ -172,6 +172,11 @@ fn return_never_type() -> ! {
     unimplemented!()
 }
 
+fn lambda_add_test() {
+    let closure_add = |a, b| a + b;
+    println!("1 + 2 = {}", closure_add(1, 2));
+}
+
 fn main() {
     this_is_binding();
     float_is_danger();
@@ -192,4 +197,5 @@ fn main() {
     container_arguments_using_ref(&arr_data);
 
     match_with_unwrap("aaa");
+    lambda_add_test();
 }
