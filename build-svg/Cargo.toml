@@ -9,4 +9,5 @@ edition = "2021"
 svg = "0.17.0"
 [[bin]]
 name = "build-svg"
-path = "src/main0-basic.rs"
+#path = "src/main0-basic.rs"
+path = "src/main1-functional.rs"
