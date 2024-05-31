@@ -1,5 +1,3 @@
-mod r#main1
-
 use std::env;
 
 use svg::node::element::path::{Command, Data, Position};
