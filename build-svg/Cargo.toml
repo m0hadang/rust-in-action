@@ -6,10 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+crossbeam = "0.8.4"
 rayon = "1.10.0"
 svg = "0.17.0"
 [[bin]]
 name = "build-svg"
 #path = "src/main0-basic.rs"
 #path = "src/main1-functional.rs"
-path = "src/main2-parallel-iterator.rs"
+#path = "src/main2-parallel-iterator.rs"
+path = "src/main3-threadpool.rs"
