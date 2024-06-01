@@ -10,4 +10,5 @@ crossbeam = "0.8.4"
 
 [[bin]]
 name = "channels"
-path = "src/main-basic.rs"
+# path = "src/main-basic.rs"
+path = "src/main-two-way.rs"
